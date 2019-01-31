@@ -1,119 +1,135 @@
 
 let x = 0;
 let y = 0;
-let spacing = 200;
-let distanceBetweenLine = 100;
-let col1H = 360;
-let col1S = 90;
-let col1L = 90;
-let col2 = 0
+
+const SQUARE = 256;
+let squareSize = SQUARE;
+const canvasWidth = squareSize*8;
+const canvasHeight = squareSize*8;
+
+let nextColumn = squareSize;
+let nextRow = squareSize;
+let lineSize = squareSize/2;
+let mirrorChance = .5;
+// let mirrorSquare = false;
 let looping = true;
 
+let color = [360, 80, 80]
+const white = [0, 100, 100]
+const black = [0, 0, 0]
+
+
 function setup() {
-  createCanvas(2400, 1200,)
+  createCanvas(canvasWidth, canvasHeight)
   colorMode(HSL, 360,100,100);
   background(0) 
 }
 
 function draw() {
-  frameRate(15)
-  
-  let smallStep = 0
-  let spaceBetweenLine = true;
-  let mirrorSquare = false;
-
+  frameRate(20)
   noSmooth();
-  strokeWeight(1);
-  // noFill();
-  
-  // if(random(1) < 0.5) {spaceBetweenLine=!spaceBetweenLine;}
-  if(random(1) < 0.5) {mirrorSquare=!mirrorSquare;}
 
-  for(let i=0; i<spacing; i++){
-    let dist = i/distanceBetweenLine;
+  let drawIncrement = 0;
+  const mirrorSquare = coinFlip(true, false, mirrorChance);
+  // let drawLine = coinFlip(true, false);
+  let drawLine = false;
+
+  //DRAW SQUARE  
+  for(let i=0; i<squareSize; i++){
+    let dist = i/lineSize;
     if(dist%1 === 0){
-      spaceBetweenLine = !spaceBetweenLine;
+      drawLine = !drawLine;
     };
-    if(spaceBetweenLine){
-      stroke(col1H,col1S,col1L);
-      // console.log("white")
+
+    if(drawLine){
+      stroke(color[0],color[1],color[2]);
     }
     else {
-      stroke(0,0,0, 0);
-      // console.log("black")
+      stroke(0, 0);
     };
+
     if(!mirrorSquare){
-      line(x+spacing-smallStep , y, x+spacing, y+smallStep);
-      line(x , y+smallStep, x+spacing-smallStep, y+spacing); 
+      line(x+squareSize-drawIncrement , y, x+squareSize, y+drawIncrement);
+      line(x , y+drawIncrement, x+squareSize-drawIncrement, y+squareSize); 
     }
     else {
-      line(x , y+smallStep, x+smallStep, y);
-      line(x+smallStep , y+spacing, x+spacing, y+smallStep);
+      line(x , y+drawIncrement, x+drawIncrement, y);
+      line(x+drawIncrement , y+squareSize, x+squareSize, y+drawIncrement);
     }
-    smallStep++
+    drawIncrement++
   }
 
     
-  // if(!mirrorSquare){
-  //   line(x , y+smallStep, x+spacing-smallStep, y+spacing); 
-  // }
-  // else {
-  //   line(x+smallStep , y+spacing, x+spacing, y+smallStep);
-  // }
+
+
+  //MOVE SQUARE
+  x = move(x, nextColumn);
   
-  x=x+spacing;
-  
+  //MOVE LINE
   if (x > width) {
     x = 0;
-    y = y+spacing
+    y = move(y, nextRow);
   }
+
+
+
+
+  //SET NEW SCENE
   if (y > height) {
-    x=0;
-    y=0;
+    x, y = 0
+    squareSize = coinFlip(SQUARE, squareSize*coinFlip(.5, 2, 0.2))
+    
+    squareSize*coinFlip(SQUARE, coinFlip(.5, 2));
+
+    nextColumn = squareSize*coinFlip(1, 2, .9);
+    nextRow = squareSize*coinFlip(1, 2, .9);
+    mirrorChance = coinFlip(.5, coinFlip(0, 1), .9);
+    let randomColor = [random(0,360), 80, 80];
+
+    //Randomize Line and Color
     let randomize = random(1)
-    if (randomize<0.25){
-      distanceBetweenLine = 25
-      col1H=random(0,360);
-      col1S=0;
-      col1L=0;
+    if (randomize<0.1){
+      lineSize = squareSize/coinFlip(32, 64)
+      color = coinFlip(coinFlip(black, white), randomColor)
+      nextColumn = squareSize*coinFlip(1, 2, .25)
+      nextRow = squareSize*coinFlip(1, 2, .25)
     }
-    else if (randomize<0.5){
-      console.log("middle")
-      distanceBetweenLine = 50
-      col1H=0;
-      col1S=100;
-      col1L=100;
+    else if (randomize<0.2){
+      lineSize = squareSize/8
+      color = coinFlip(black, white)
+      nextColumn = squareSize*coinFlip(1, 2, .5)
+      nextRow = squareSize*coinFlip(1, 2, .5)
+    }
+    else if (randomize<0.4){
+      lineSize = squareSize/4
+      color = coinFlip(black, white)
     }
     else {
-      distanceBetweenLine = 100
-      col1H=random(0,360);
-      col1S=80;
-      col1L=80;
+      lineSize = squareSize/2
+      color = randomColor;
     };
-
-    // console.log("end")
-    // noLoop();
-
   }
 }
 
+
+// HELPERS
+function move(pos, distance, step=1){
+  pos=pos+distance*step;
+  return pos;
+}
+
+function coinFlip(arg1, arg2, chance = .5){
+  let randomize = random(1)
+  if (randomize<chance){
+    return arg1
+  }
+  else{
+    return arg2
+  }
+}
+
+// EVENTS
 function keyPressed() {
-    // if (keyCode === LEFT_ARROW) {
-    //   rose.playspeed = rose.playspeed / 2;
-    //   // console.log("left");
-    // } else if (keyCode === RIGHT_ARROW) {
-    //   rose.playspeed = rose.playspeed * 2;
-    //   // console.log("right");
-    // } else if (keyCode === UP_ARROW) {
-    //   rose.c = rose.c + 0.1;
-    //   // console.log("up");
-    // } else if (keyCode === DOWN_ARROW) {
-    //   rose.c = rose.c - 0.1;
-    //   if (rose.c <= 0.1) {
-    //     rose.c = 1;
-    //   }
-    //   // console.log("down");
-    // } 
     if (keyCode === 32) {
       if (looping) {
         noLoop()
@@ -122,6 +138,5 @@ function keyPressed() {
         loop()
         looping = true;
       }
-      // console.log("spacebar");
     }
   }
