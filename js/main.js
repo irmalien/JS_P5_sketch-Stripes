@@ -30,7 +30,7 @@ function setup() {
 
 
 function draw() {
-  // background(0,0,0);
+  background(0,0,0);
   frameRate(scene.fps);
   addRemoveObj(objArr, quantity, new Square())
 

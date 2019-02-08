@@ -81,7 +81,7 @@ class Square {
   //IF ACTIVE
   select(){
     if(this.isPressed){
-      const safeArea = 10;
+      const safeArea = (this.weight/2)+10;
       if(mouseX>this.x-safeArea && mouseX<this.x+safeArea){
         this.selected = true;
       }
@@ -91,16 +91,38 @@ class Square {
   drag(){
     if(this.isPressed && this.isSelected){
       let dist = mouseX-this.x
+      this.xTemp = this.x+(dist/this.weight);
+    }
+  }
+
+  dragG(){
+    if(this.isPressed && this.isSelected){
+      let dist = mouseX-this.x
+      if(dist<0){dist = -dist};
+      const r2 = dist*dist;
+      const m1 = 1000;
+      const m2 = 1;
+      const G = 1;
+
+      const F = G*((m1*m2)/r2);
+      // const a = F/m1
+      console.log(F)
+      this.xTemp = this.x+F;
+    }
+  }
+
+  dragSimple(){
+    if(this.isPressed && this.isSelected){
+      let dist = mouseX-this.x
       this.xTemp = this.x+(10*Math.cbrt(dist))
     }
-
   }
 
   snap(){
     if(this.isPressed && this.isSelected){
       let dist = mouseX-this.x;
       if(dist<0){dist = -dist};
-      if(dist>300){
+      if(dist>400){
         this.pressed = false;
         this.released = true;
       }
@@ -120,7 +142,7 @@ class Square {
         else{
           this.bSin.timeY = this.bSin.frequency;
         }
-        this.bSin.speed =0.3;
+        this.bSin.speed =2/this.weight;
         this.bSin.amplitude = dist;
         this.bSin.frequency = 1,
         this.bSin.decay = 0.98

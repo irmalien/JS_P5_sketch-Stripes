@@ -7,29 +7,31 @@ window.addEventListener("load", menu, false);
 function menu(){
   const menu = document.createElement('div');
   const list = document.createElement('ul');
-  menu.style.cssText = 'position:absolute;width:100px;height:120px;top:15px; left:15px; display:flex;align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.5rem; background-color: #111; opacity: 0.8';
+  menu.style.cssText = 'position:absolute;width:165px;height:210px;top:15px; left:15px; display:flex;align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.75rem; background-color: #111; opacity: 0.8; -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;';
   menu.id = "menu";
-  list.style.cssText = 'list-style-type: none; margin: 0; padding: 0; font-family: "Source Code Pro", monospace;';
+  list.style.cssText = 'list-style-type: none; margin: 0; padding: 0; font-family: "Source Code Pro", monospace; font-size:0.75rem; color: #fff';
   document.body.appendChild(menu);
   menu.appendChild(list);
 
   const eventList = [
-    'Mouse1: Bounce',
+    '[Mouse] Bounce',
+    '[Shift] Menu',
+    '[Space] Pause/Play',
     '&nbsp;',
-    'M: Menu',
-    'S: Pause/Play', 
-    '↑: Add',
-    '↓: Remove', 
-    '←: Slower',
-    '→: Faster', 
-    'C: Color',
-    'S: Save', 
+    '[↑] Add',
+    '[↓] Remove', 
+    '[←] Slower',
+    '[→] Faster',
+    '&nbsp;',
+    '[M] Mode',
+    '[C] Color',
+    '[D] Download', 
   ]
 
   for (let i = 0; i < eventList.length; i++) {
     const listItem = document.createElement('li');
     listItem.innerHTML = eventList[i];
-    listItem.style.cssText = 'font-size:0.5rem; color: #fff';
+    // listItem.style.cssText = '';
     list.appendChild(listItem);;
   }
 

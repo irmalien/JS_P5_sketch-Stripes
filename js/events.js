@@ -52,7 +52,7 @@ function keyPressed() {
     }
     // console.log("c:color");
   }
-  else if (keyCode === 77) {
+  else if (keyCode === SHIFT) {
     toggleMenu();
     // console.log("m:menu");
   }
