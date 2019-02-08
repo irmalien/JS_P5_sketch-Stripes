@@ -14,6 +14,17 @@ function edgeless(x = undefined){
   return x;
 }
 
+function addRemoveObj(arr, quantity, obj){
+  if(arr.length>quantity){
+    arr.splice(0, 1);
+  }
+  else if(arr.length<quantity){
+    arr.push(
+      obj)
+  }
+}
+
+
 colArray = [];
 
 function selectColor(){
@@ -26,9 +37,16 @@ function selectColor(){
 }
 
 
-function selectPalette(size =5, white = true, black = false){
-  let selectRand = floor(random(0, colorsData.palettes.length))
-
+function selectPalette(white = true, black = false, size = 5, selected = undefined){
+  let selectRand;
+  if(selected !=undefined){
+    selectRand = selected;
+  }
+  else{
+    selectRand = floor(random(0, colorsData.palettes.length))
+  }
+  console.log("color:" + selectRand);
+  
   if (size > colorsData.palettes[selectRand].length){
     size = colorsData.palettes[selectRand].length
   };
