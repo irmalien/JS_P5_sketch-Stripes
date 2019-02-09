@@ -28,6 +28,7 @@ function setup() {
   }
 }
 
+let mousePos = [0, 0]
 
 function draw() {
   background(0,0,0);
@@ -43,6 +44,7 @@ function draw() {
         objArr[i].bounce();
       objArr[i].draw();
   }
+  mousePos = [mouseX, mouseY]
   scene.fadeIn(300);
   // scene.download(scene.countDraw, 100, 3)
   // scene.pause(1000);

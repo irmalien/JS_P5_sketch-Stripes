@@ -22,6 +22,10 @@ function keyPressed() {
     }
     // console.log("space:pause/play");
   }
+  else if (keyCode === SHIFT) {
+    toggleMenu();
+    // console.log("m:menu");
+  }
   else if (keyCode === LEFT_ARROW) {
     for(i = objArr.length-1; i >= 0; i-- ){
       objArr[i].newSpeed = false;
@@ -45,6 +49,13 @@ function keyPressed() {
     else {quantity=floor(quantity*0.1)} 
     // console.log("down:remove");
   }
+  else if (keyCode === 77) {
+    // selectPalette(true, true, 5);
+    // for(i = objArr.length-1; i >= 0; i-- ){
+    //   objArr[i].newColor = selectColor();
+    // }
+    // console.log("m:mode");
+  }
   else if (keyCode === 67) {
     selectPalette(true, true, 5);
     for(i = objArr.length-1; i >= 0; i-- ){
@@ -52,13 +63,10 @@ function keyPressed() {
     }
     // console.log("c:color");
   }
-  else if (keyCode === SHIFT) {
-    toggleMenu();
-    // console.log("m:menu");
-  }
 
-  else if (keyCode === 83) {
+
+  else if (keyCode === 68) {
     saveCanvas(scene.titleShort, 'png')
-    // console.log("s:save");
+    // console.log("d:download");
   }
 }

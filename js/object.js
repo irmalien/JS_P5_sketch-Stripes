@@ -39,8 +39,6 @@ class Square {
 
   };
 
-
-
   move(){
     if(this.horisontal){
       if(this.direction){
@@ -81,6 +79,20 @@ class Square {
   //IF ACTIVE
   select(){
     if(this.isPressed){
+      if(mousePos[0]<this.x && mouseX>this.x){
+        this.selected = true;
+      }
+      else if(mousePos[0]>this.x && mouseX<this.x){
+        this.selected = true;
+      }
+      else if(mousePos[0]===this.x || mouseX===this.x){
+        this.selected = true;
+      }
+    }
+  }
+
+  selectSimple(){
+    if(this.isPressed){
       const safeArea = (this.weight/2)+10;
       if(mouseX>this.x-safeArea && mouseX<this.x+safeArea){
         this.selected = true;
@@ -92,29 +104,6 @@ class Square {
     if(this.isPressed && this.isSelected){
       let dist = mouseX-this.x
       this.xTemp = this.x+(dist/this.weight);
-    }
-  }
-
-  dragG(){
-    if(this.isPressed && this.isSelected){
-      let dist = mouseX-this.x
-      if(dist<0){dist = -dist};
-      const r2 = dist*dist;
-      const m1 = 1000;
-      const m2 = 1;
-      const G = 1;
-
-      const F = G*((m1*m2)/r2);
-      // const a = F/m1
-      console.log(F)
-      this.xTemp = this.x+F;
-    }
-  }
-
-  dragSimple(){
-    if(this.isPressed && this.isSelected){
-      let dist = mouseX-this.x
-      this.xTemp = this.x+(10*Math.cbrt(dist))
     }
   }
 
@@ -159,24 +148,6 @@ class Square {
       if(this.bSin.amplitude<this.bSin.endstate){
         this.xTemp = null;
         this.bSin.initialized = false;
-        this.released = false;
-        this.selected = false;
-      }
-    }
-  }
-
-
-  bounceSimple(){
-    if(this.isReleased && this.isSelected){
-      const safeArea = 10
-      if(this.xTemp>this.x){
-        this.xTemp = floor(this.xTemp-10)
-      }
-      else{
-        this.xTemp = floor(this.xTemp+10)
-      };
-      if (this.xTemp >this.x-safeArea && this.xTemp <this.x+safeArea){
-        this.xTemp = null;
         this.released = false;
         this.selected = false;
       }
