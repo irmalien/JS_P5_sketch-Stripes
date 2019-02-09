@@ -14,6 +14,7 @@ const scene = {
   countDraw: 0,
   fps: 30,
   trailing: 1,
+  mode: false,
 
   wrapCanvas (id) {
     const canvasWrapper = document.createElement('div');

@@ -50,10 +50,7 @@ function keyPressed() {
     // console.log("down:remove");
   }
   else if (keyCode === 77) {
-    // selectPalette(true, true, 5);
-    // for(i = objArr.length-1; i >= 0; i-- ){
-    //   objArr[i].newColor = selectColor();
-    // }
+    scene.mode = !scene.mode;
     // console.log("m:mode");
   }
   else if (keyCode === 67) {

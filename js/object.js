@@ -91,15 +91,6 @@ class Square {
     }
   }
 
-  selectSimple(){
-    if(this.isPressed){
-      const safeArea = (this.weight/2)+10;
-      if(mouseX>this.x-safeArea && mouseX<this.x+safeArea){
-        this.selected = true;
-      }
-    }
-  }
-
   drag(){
     if(this.isPressed && this.isSelected){
       let dist = mouseX-this.x

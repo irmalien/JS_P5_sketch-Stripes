@@ -31,7 +31,10 @@ function setup() {
 let mousePos = [0, 0]
 
 function draw() {
-  background(0,0,0);
+  if(scene.mode){
+    background(0,0,0);
+  }
+
   frameRate(scene.fps);
   addRemoveObj(objArr, quantity, new Square())
 
