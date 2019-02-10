@@ -7,7 +7,7 @@ window.addEventListener("load", menu, false);
 function menu(){
   const menu = document.createElement('div');
   const list = document.createElement('ul');
-  menu.style.cssText = 'position:absolute;width:165px;height:210px;top:15px; left:15px; display:flex;align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.75rem; background-color: #111; opacity: 0.8; -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;';
+  menu.style.cssText = 'position:absolute;width:10rem;height:14rem;top:15px; left:15px; display:flex;align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.75rem; background-color: #111; opacity: 0.8; -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;';
   menu.id = "menu";
   list.style.cssText = 'list-style-type: none; margin: 0; padding: 0; font-family: "Source Code Pro", monospace; font-size:0.75rem; color: #fff';
   document.body.appendChild(menu);
