@@ -24,6 +24,23 @@ function addRemoveObj(arr, quantity, obj){
   }
 }
 
+function mobileVersion(normal, mobile){
+  if( navigator.userAgent.match(/Android/i)
+  || navigator.userAgent.match(/webOS/i)
+  || navigator.userAgent.match(/iPhone/i)
+  || navigator.userAgent.match(/iPod/i)
+  || navigator.userAgent.match(/BlackBerry/i)
+  || navigator.userAgent.match(/Windows Phone/i)
+  ){
+    return mobile
+  }
+  else if(document.documentElement.clientWidth < 900){
+    return mobile
+  }
+  else{
+    return normal
+  }
+}
 
 colArray = [];
 

@@ -22,7 +22,7 @@ function keyPressed() {
     }
     // console.log("space:pause/play");
   }
-  else if (keyCode === SHIFT) {
+  else if (keyCode === TAB) {
     toggleMenu();
     // console.log("m:menu");
   }
@@ -46,7 +46,9 @@ function keyPressed() {
   } 
   else if (keyCode === DOWN_ARROW) {
     if(quantity<=25){quantity=quantity-1}
-    else {quantity=floor(quantity*0.1)} 
+    else if(quantity<1){quantity=1}
+    else {quantity=floor(quantity*0.1)}
+
     // console.log("down:remove");
   }
   else if (keyCode === 77) {

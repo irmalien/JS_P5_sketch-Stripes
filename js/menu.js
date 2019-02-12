@@ -3,11 +3,12 @@ changeFavicon('https://co-de-sign.herokuapp.com/img/favicon00.png');
 googleFonts('https://fonts.googleapis.com/css?family=Source+Code+Pro:400')
 window.addEventListener("load", menu, false);
 
+const display = mobileVersion("display:flex;", "display:none;")
 
 function menu(){
   const menu = document.createElement('div');
   const list = document.createElement('ul');
-  menu.style.cssText = 'position:absolute;width:10rem;height:14rem;top:15px; left:15px; display:flex;align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.75rem; background-color: #111; opacity: 0.8; -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;';
+  menu.style.cssText = `position:absolute;width:10rem;height:14rem;top:15px; left:15px; ${display}align-items:left;justify-content:top;background:#fff; z-index:100; padding:0.75rem; background-color: #111; opacity: 0.8; -webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;`;
   menu.id = "menu";
   list.style.cssText = 'list-style-type: none; margin: 0; padding: 0; font-family: "Source Code Pro", monospace; font-size:0.75rem; color: #fff';
   document.body.appendChild(menu);
@@ -15,7 +16,7 @@ function menu(){
 
   const eventList = [
     '[Mouse] Bounce',
-    '[Shift] Menu',
+    '[Tab] Hide menu',
     '[Space] Pause/Play',
     '&nbsp;',
     '[↑] Add',
